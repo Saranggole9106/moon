@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Facts App</title>
+    <style>
+        /* Your existing CSS styles remain the same */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a2a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: backgroundPulse 4s infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0% { background-color: #0a0a2a; }
+            50% { background-color: #1a1a4f; }
+            100% { background-color: #0a0a2a; }
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            text-shadow: 0 0 10px #fff,
+                         0 0 20px #fff,
+                         0 0 30px #e60073,
+                         0 0 40px #e60073;
+            animation: glowPulse 1.5s infinite;
+        }
+
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073; }
+            50% { text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #e60073, 0 0 50px #e60073; }
+            100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073; }
+        }
+
+        .fact-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        #fact-text {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+
+        #fact-category {
+            color: #00ffff;
+            font-style: italic;
+            text-shadow: 0 0 8px #00ffff;
+        }
+
+        button {
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(142,45,226,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(142,45,226,0.6);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Space Facts ⚡</h1>
+        <div class="fact-card">
+            <p id="fact-text">Click the button to see a space fact!</p>
+            <p id="fact-category"></p>
+        </div>
+        <button id="next-fact">Next Fact ⚡</button>
+    </div>
+
+    <script>
+        const spaceFacts = {
+            "space_facts": [
+                {
+                    "id": 1,
+                    "fact": "Space is completely silent because there is no atmosphere to carry sound waves",
+                    "category": "physics"
+                },
+                {
+                    "id": 2,
+                    "fact": "The largest known star, UY Scuti, is so big that it would take 1,700 years to walk around it at walking speed",
+                    "category": "stars"
+                },
+                {
+                    "id": 3,
+                    "fact": "One day on Venus is longer than one year on Earth",
+                    "category": "planets"
+                },
+                {
+                    "id": 4,
+                    "fact": "There are more stars in the universe than grains of sand on all the beaches on Earth",
+                    "category": "universe"
+                },
+                {
+                    "id": 5,
+                    "fact": "The footprints left by Apollo astronauts on the Moon will last for millions of years",
+                    "category": "exploration"
+                },
+                {
+                    "id": 6,
+                    "fact": "Light from the Sun takes about 8 minutes to reach Earth",
+                    "category": "physics"
+                },
+                {
+                    "id": 7,
+                    "fact": "The Milky Way galaxy is about 100,000 light-years across",
+                    "category": "galaxy"
+                },
+                {
+                    "id": 8,
+                    "fact": "A black hole's gravitational pull is so strong that even light cannot escape it",
+                    "category": "black holes"
+                },
+                {
+                    "id": 9,
+                    "fact": "There are billions of galaxies in the observable universe",
+                    "category": "universe"
+                },
+                {
+                    "id": 10,
+                    "fact": "Jupiter's Great Red Spot is a giant storm that has been raging for at least 400 years",
+                    "category": "planets"
+                }
+            ]
+        };
+
+        let currentFactIndex = -1;
+
+        function displayRandomFact() {
+            const facts = spaceFacts.space_facts;
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * facts.length);
+            } while (newIndex === currentFactIndex && facts.length > 1);
+            
+            currentFactIndex = newIndex;
+            const fact = facts[currentFactIndex];
+            
+            document.getElementById('fact-text').textContent = fact.fact;
+            document.getElementById('fact-category').textContent = `Category: ${fact.category}`;
+        }
+
+        document.getElementById('next-fact').addEventListener('click', displayRandomFact);
+
+        // Display a fact when the page loads
+        displayRandomFact();
+    </script>
+</body>
+</html>
